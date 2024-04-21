@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextLogin = findViewById(R.id.inputlogin);
         editTextPassword = findViewById(R.id.inputpassword);
         buttonLogin = findViewById(R.id.loginbutton);
-        textViewRegister = findViewById(R.id.textregister);
+        //textViewRegister = findViewById(R.id.textregister);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
