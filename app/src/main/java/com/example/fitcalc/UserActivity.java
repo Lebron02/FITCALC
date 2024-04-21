@@ -11,7 +11,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_training);
+        setContentView(R.layout.activity_user);
 
         // Inicjalizacja widoków
         ImageView imageViewJedzenie = findViewById(R.id.imageView7);
