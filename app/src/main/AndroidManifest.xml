@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DietActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SummaryActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

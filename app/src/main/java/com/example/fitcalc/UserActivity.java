@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TrainingActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,14 +15,13 @@ public class TrainingActivity extends AppCompatActivity {
 
         // Inicjalizacja widoków
         ImageView imageViewJedzenie = findViewById(R.id.imageView7);
+        ImageView imageViewStopa = findViewById(R.id.imageView6);
         ImageView imageViewAnaliza = findViewById(R.id.imageView5);
-        ImageView imageViewLudzik = findViewById(R.id.imageView4);
-
 
         imageViewJedzenie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingActivity.this, DietActivity.class);
+                Intent intent = new Intent(UserActivity.this, DietActivity.class);
                 startActivity(intent);
             }
         });
@@ -31,17 +30,18 @@ public class TrainingActivity extends AppCompatActivity {
         imageViewAnaliza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingActivity.this, SummaryActivity.class);
+                Intent intent = new Intent(UserActivity.this, SummaryActivity.class);
                 startActivity(intent);
             }
         });
 
-        imageViewLudzik.setOnClickListener(new View.OnClickListener() {
+        imageViewStopa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainingActivity.this, UserActivity.class);
+                Intent intent = new Intent(UserActivity.this, TrainingActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 }
