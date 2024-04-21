@@ -17,25 +17,25 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_diet);
 
-        editTextLogin = findViewById(R.id.inputlogin);
-        editTextPassword = findViewById(R.id.inputpassword);
-        buttonLogin = findViewById(R.id.loginbutton);
-        //textViewRegister = findViewById(R.id.textregister);
-
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Logika logowania
-            }
-        });
-
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Przejdź do aktywności rejestracji
-            }
-        });
+//        editTextLogin = findViewById(R.id.inputlogin);
+//        editTextPassword = findViewById(R.id.inputpassword);
+//        buttonLogin = findViewById(R.id.loginbutton);
+//        //textViewRegister = findViewById(R.id.textregister);
+//
+//        buttonLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Logika logowania
+//            }
+//        });
+//
+//        textViewRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Przejdź do aktywności rejestracji
+//            }
+//        });
     }
 }
