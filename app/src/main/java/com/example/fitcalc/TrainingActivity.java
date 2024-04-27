@@ -36,6 +36,14 @@ public class TrainingActivity extends AppCompatActivity {
             }
         });
 
+        imageViewJedzenie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrainingActivity.this, DietActivity.class);
+                startActivity(intent);
+            }
+        });
+
         imageViewLudzik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

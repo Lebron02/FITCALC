@@ -3,18 +3,21 @@ package com.example.fitcalc;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,47 +49,71 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     private class LoginTask extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... params) {
             String username = params[0];
             String password = params[1];
-            Connection connection = null;
-            PreparedStatement statement = null;
-            ResultSet resultSet = null;
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
             try {
-                connection = DatabaseConnector.connect();
-                String query = "SELECT * FROM FITCALC.Users WHERE username = ? AND password = ?";
-                statement = connection.prepareStatement(query);
-                statement.setString(1, username);
-                statement.setString(2, password);
-                resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    return true;  // User found
+                URL url = new URL("http://10.0.2.2:3000/api/login");
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                JSONObject jsonParams = new JSONObject();
+                jsonParams.put("username", username);
+                jsonParams.put("password", password);
+
+                Log.d("LoginTask", "Request JSON: " + jsonParams.toString());
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(jsonParams.toString().getBytes());
+                outputStream.flush();
+                outputStream.close();
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    return jsonResponse.getBoolean("success");
                 }
-            } catch (SQLException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             } finally {
-                try {
-                    if (resultSet != null) resultSet.close();
-                    if (statement != null) statement.close();
-                    if (connection != null) connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-            return false;  // User not found
+            return false;
         }
 
         @Override
         protected void onPostExecute(Boolean success) {
             if (success) {
+                // Logowanie udane, wykonaj odpowiednie akcje (np. przejście do kolejnej aktywności)
                 Intent intent = new Intent(LoginActivity.this, DietActivity.class);
                 startActivity(intent);
             } else {
+                // Logowanie nieudane, wyświetl komunikat o błędzie
                 Toast.makeText(LoginActivity.this, "Nieprawidłowy login lub hasło.", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+
 }
