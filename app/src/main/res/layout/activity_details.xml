@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background">
+
+    <Button
+        android:id="@+id/button_dodaj"
+        android:layout_width="164dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/rounded_loginbutton"
+        android:fontFamily="@font/itimregular"
+        android:text="Dodaj"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_przelicz"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        android:fontFamily="@font/itimregular"
+        android:shadowColor="@color/black"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
+        android:text="Weight"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
+
+    <TextView
+        android:id="@+id/text_carbohydrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itimregular"
+        android:shadowColor="@color/black"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
+        android:text="Carbohydrate"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <TextView
+        android:id="@+id/text_protein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itimregular"
+        android:shadowColor="@color/black"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
+        android:text="Protein"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <TextView
+        android:id="@+id/text_fat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itimregular"
+        android:shadowColor="@color/black"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
+        android:text="Fat"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="300"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_przelicz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_weight"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <EditText
+        android:id="@+id/carbohydrates"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="335dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="300"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.886"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/protein"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="300"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
+
+    <EditText
+        android:id="@+id/fat"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="300"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
+
+    <TextView
+        android:id="@+id/textapp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:text="FITCALC"
+        android:textColor="@color/red"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="293dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/rounded_edittext"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:text="Jajka"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textapp" />
+
+    <EditText
+        android:id="@+id/kalorie"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:fontFamily="@font/itimregular"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="300"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
+
+    <Button
+        android:id="@+id/button_przelicz"
+        android:layout_width="164dp"
+        android:layout_height="27dp"
+        android:background="@drawable/rounded_loginbutton"
+        android:fontFamily="@font/itimregular"
+        android:text="Przelicz"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="430dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/jedzenie" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/analiza" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/stopa" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ludzik" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_kcal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itimregular"
+        android:shadowColor="@color/black"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
+        android:text="Kcal"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="212dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

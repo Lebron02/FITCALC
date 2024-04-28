@@ -49,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private class LoginTask extends AsyncTask<String, Void, Boolean> {
+    private class LoginTask extends AsyncTask<String, Void, String> {
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             String username = params[0];
             String password = params[1];
             HttpURLConnection connection = null;
@@ -67,8 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                 jsonParams.put("username", username);
                 jsonParams.put("password", password);
 
-                Log.d("LoginTask", "Request JSON: " + jsonParams.toString());
-
                 OutputStream outputStream = connection.getOutputStream();
                 outputStream.write(jsonParams.toString().getBytes());
                 outputStream.flush();
@@ -83,7 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                         response.append(line);
                     }
                     JSONObject jsonResponse = new JSONObject(response.toString());
-                    return jsonResponse.getBoolean("success");
+                    if (jsonResponse.getBoolean("success")) {
+                        return jsonResponse.getString("userId"); // Assume the response includes the user ID
+                    }
                 }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
@@ -99,17 +99,16 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
-            return false;
+            return null;
         }
 
         @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                // Logowanie udane, wykonaj odpowiednie akcje (np. przejście do kolejnej aktywności)
+        protected void onPostExecute(String userId) {
+            if (userId != null) {
                 Intent intent = new Intent(LoginActivity.this, DietActivity.class);
+                intent.putExtra("userId", userId); // Passing user ID to the next Activity
                 startActivity(intent);
             } else {
-                // Logowanie nieudane, wyświetl komunikat o błędzie
                 Toast.makeText(LoginActivity.this, "Nieprawidłowy login lub hasło.", Toast.LENGTH_SHORT).show();
             }
         }

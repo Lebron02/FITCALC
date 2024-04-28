@@ -2,6 +2,7 @@ package com.example.fitcalc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +27,32 @@ public class SearchActivity extends AppCompatActivity {
     private ProductAdapter adapter;
     private List<Product> productList = new ArrayList<>();
 
+    private String userId;
+    private String date;
+    private String mealType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Log.d("ups", "jesteśmy");
 
+        userId = getIntent().getStringExtra("userId");
+        date = getIntent().getStringExtra("date");
+        mealType = getIntent().getStringExtra("mealType");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new ProductAdapter(productList);
+
+        adapter.setOnItemClickListener(new ProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Product product) {
+                Toast.makeText(SearchActivity.this, "Clicked: " + product.getProductName(), Toast.LENGTH_SHORT).show();
+                fetchProductDetails(product.getProductName());
+            }
+        });
+
         recyclerView.setAdapter(adapter);
 
         loadProducts();
@@ -121,5 +138,35 @@ public class SearchActivity extends AppCompatActivity {
                 Toast.makeText(SearchActivity.this, "Failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+    private void fetchProductDetails(String productName) {
+        ProductApi api = RetrofitClient.getClient("http://10.0.2.2:3000/").create(ProductApi.class);
+        Call<List<Product>> call = api.getProductDetails(productName);
+
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    Product detailedProduct = response.body().get(0); // Assuming the response returns at least one product
+                    // Here you can update the UI with the details or open a new detail activity
+                    showProductDetails(detailedProduct);
+                } else {
+                    Toast.makeText(SearchActivity.this, "No details found for selected product.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(SearchActivity.this, "Error fetching product details: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void showProductDetails(Product product) {
+        Intent Intent = new Intent(SearchActivity.this, DetailsActivity.class);
+        Intent.putExtra("userId", userId);
+        Intent.putExtra("date", date);
+        Intent.putExtra("mealType", mealType);
+        Intent.putExtra("productDetails", product);
+        startActivity(Intent);
     }
 }
