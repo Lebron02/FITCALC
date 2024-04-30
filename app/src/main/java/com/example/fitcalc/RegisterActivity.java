@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,55 +22,62 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editTextLogin;
+    private EditText editTextUsername;
     private EditText editTextPassword;
-    private Button buttonLogin;
-    private TextView textViewRegister;
-    private String username;
+    private EditText editTextPassword2;
+    private Button buttonRegister;
+    private TextView textViewLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
-        editTextLogin = findViewById(R.id.inputlogin);
+        editTextUsername = findViewById(R.id.inputlogin);
         editTextPassword = findViewById(R.id.inputpassword);
-        buttonLogin = findViewById(R.id.loginbutton);
-        textViewRegister = findViewById(R.id.textregister);
+        editTextPassword2 = findViewById(R.id.inputpassword2);
+        buttonRegister = findViewById(R.id.registerbutton);
+        textViewLogin = findViewById(R.id.login);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = editTextLogin.getText().toString().trim();
-                final String password = editTextPassword.getText().toString().trim();
-                if (!username.isEmpty() && !password.isEmpty()) {
-                    new LoginTask().execute(username, password);
+                String username = editTextUsername.getText().toString().trim();
+                String password = editTextPassword.getText().toString().trim();
+                String password2 = editTextPassword2.getText().toString().trim();
+                if (!username.isEmpty() && !password.isEmpty() && !password2.isEmpty() && password.equals(password2)) {
+                    new RegisterTask().execute(username, password);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Podaj login i hasło.", Toast.LENGTH_SHORT).show();
+                    if(!password.equals(password2)){
+                        Toast.makeText(RegisterActivity.this, "Wprowadzone hasła są różne!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(RegisterActivity.this, "Podaj nazwę użytkownika i hasło.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
     }
-    private class LoginTask extends AsyncTask<String, Void, String> {
+
+    private class RegisterTask extends AsyncTask<String, Void, Boolean> {
         @Override
-        protected String doInBackground(String... params) {
+        protected Boolean doInBackground(String... params) {
             String username = params[0];
             String password = params[1];
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try {
-                URL url = new URL("http://10.0.2.2:3000/api/login");
+                URL url = new URL("http://10.0.2.2:3000/api/register");
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -83,20 +93,10 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    JSONObject jsonResponse = new JSONObject(response.toString());
-                    if (jsonResponse.getBoolean("success")) {
-                        return jsonResponse.getString("userId"); // Assume the response includes the user ID
-                    }
-                }
+                return responseCode == HttpURLConnection.HTTP_CREATED;
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
+                return false;
             } finally {
                 if (connection != null) {
                     connection.disconnect();
@@ -109,23 +109,17 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
-            return null;
         }
 
         @Override
-        protected void onPostExecute(String userId) {
-            if (userId != null) {
-                Intent intent = new Intent(LoginActivity.this, DietActivity.class);
-                intent.putExtra("userId", userId); // Passing user ID to the next Activity
-                intent.putExtra("username", username); // Passing username to the next Activity
+        protected void onPostExecute(Boolean success) {
+            if (success) {
+                Toast.makeText(RegisterActivity.this, "Rejestracja zakończona pomyślnie.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(LoginActivity.this, "Nieprawidłowy login lub hasło.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Nie udało się zarejestrować.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-
-
-
 }
