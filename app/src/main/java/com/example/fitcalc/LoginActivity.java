@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private Button buttonLogin;
     private TextView textViewRegister;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String username = editTextLogin.getText().toString().trim();
+                username = editTextLogin.getText().toString().trim();
                 final String password = editTextPassword.getText().toString().trim();
                 if (!username.isEmpty() && !password.isEmpty()) {
                     new LoginTask().execute(username, password);
@@ -107,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             if (userId != null) {
                 Intent intent = new Intent(LoginActivity.this, DietActivity.class);
                 intent.putExtra("userId", userId); // Passing user ID to the next Activity
+                intent.putExtra("username", username); // Passing username to the next Activity
                 startActivity(intent);
             } else {
                 Toast.makeText(LoginActivity.this, "Nieprawidłowy login lub hasło.", Toast.LENGTH_SHORT).show();

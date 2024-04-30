@@ -24,6 +24,8 @@ public class DietActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diet);
 
         String userId = getIntent().getStringExtra("userId");
+        String username = getIntent().getStringExtra("username");
+
         if (userId != null) {
             // Use the userId for whatever you need here
             Log.d("DietActivity", "Logged in User ID: " + userId);
@@ -57,7 +59,11 @@ public class DietActivity extends AppCompatActivity {
         // Setting OnClickListener for image views and buttons
         imageViewAnaliza.setOnClickListener(v -> startActivity(new Intent(DietActivity.this, SummaryActivity.class)));
         imageViewStopa.setOnClickListener(v -> startActivity(new Intent(DietActivity.this, TrainingActivity.class)));
-        imageViewLudzik.setOnClickListener(v -> startActivity(new Intent(DietActivity.this, UserActivity.class)));
+        imageViewLudzik.setOnClickListener(v -> {
+            Intent intent = new Intent(DietActivity.this, UserActivity.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        });
 
         // Pass user ID, date, and meal type when clicking the button
         ButtonAddSniadanie.setOnClickListener(v -> {

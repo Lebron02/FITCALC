@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,12 @@ public class UserActivity extends AppCompatActivity {
         ImageView imageViewJedzenie = findViewById(R.id.imageView7);
         ImageView imageViewStopa = findViewById(R.id.imageView6);
         ImageView imageViewAnaliza = findViewById(R.id.imageView5);
+
+        TextView textViewUsername = findViewById(R.id.textView26); // Dodaj inicjalizację TextView
+
+        String username = getIntent().getStringExtra("username");
+
+        textViewUsername.setText(username);
 
         imageViewJedzenie.setOnClickListener(new View.OnClickListener() {
             @Override

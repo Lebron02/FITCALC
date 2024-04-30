@@ -6,7 +6,7 @@
     android:background="@color/lightbackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <EditText
         android:id="@+id/training_text2"
         android:layout_width="110dp"
         android:layout_height="40dp"
@@ -17,14 +17,15 @@
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="1.6"
-        android:text="12.0g"
+        android:text="0"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/training_text3"
-        app:layout_constraintTop_toTopOf="@+id/textView23" />
+        app:layout_constraintTop_toTopOf="@+id/textView23"
+        android:inputType="number"/>
 
-    <TextView
+    <EditText
         android:id="@+id/training_text4"
         android:layout_width="110dp"
         android:layout_height="40dp"
@@ -35,14 +36,15 @@
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="1.6"
-        android:text="2000"
+        android:text="0"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/training_text2"
-        app:layout_constraintTop_toTopOf="@+id/textView24" />
+        app:layout_constraintTop_toTopOf="@+id/textView24"
+        android:inputType="number"/>
 
-    <TextView
+    <EditText
         android:id="@+id/training_text3"
         android:layout_width="110dp"
         android:layout_height="40dp"
@@ -53,12 +55,13 @@
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="1.6"
-        android:text="12.0g"
+        android:text="0"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/training_text"
-        app:layout_constraintTop_toTopOf="@+id/textView22" />
+        app:layout_constraintTop_toTopOf="@+id/textView22"
+        android:inputType="number"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout_header"
@@ -107,7 +110,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/training_text"
         android:layout_width="110dp"
         android:layout_height="40dp"
@@ -119,12 +122,13 @@
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="1.6"
-        android:text="12.0g"
+        android:text="0"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20" />
+        app:layout_constraintTop_toTopOf="@+id/textView20"
+        android:inputType="number"/>
 
     <Button
         android:id="@+id/loginbutton"
