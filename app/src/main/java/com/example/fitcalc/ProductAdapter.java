@@ -223,6 +223,109 @@ class MealData {
     public int getWeight() { return weight; }
     public int getKcal() { return kcal; }
 }
+class Meal {
+    // Member variables for the meal details
+    private int meal_id;
+    private int user_id;
+    private String meal_date;
+    private String meal_type;
+    private int total_calories;
+    private int total_protein;
+    private int total_carbs;
+    private int total_fat;
 
+    // Constructor
+    public Meal(int meal_id, int user_id, String meal_date, String meal_type, int total_calories, int total_protein, int total_carbs, int total_fat) {
+        this.meal_id = meal_id;
+        this.user_id = user_id;
+        this.meal_date = meal_date;
+        this.meal_type = meal_type;
+        this.total_calories = total_calories;
+        this.total_protein = total_protein;
+        this.total_carbs = total_carbs;
+        this.total_fat = total_fat;
+    }
+
+    public int getMeal_id() {
+        return meal_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public String getMeal_date() {
+        return meal_date;
+    }
+
+    public String getMeal_type() {
+        return meal_type;
+    }
+
+    public int getTotal_calories() {
+        return total_calories;
+    }
+
+    public int getTotal_protein() {
+        return total_protein;
+    }
+
+    public int getTotal_carbs() {
+        return total_carbs;
+    }
+
+    public int getTotal_fat() {
+        return total_fat;
+    }
+}
+
+class Summary {
+    // Member variables for the meal details
+    private int summary_id;
+    private int user_id;
+    private String date ;
+    private int consumed_calories;
+    private int consumed_protein;
+    private int consumed_carbohydrates;
+    private int consumed_fat;
+
+    // Constructor
+    public Summary(int summary_id, int user_id, String date, int consumed_calories, int consumed_protein, int consumed_carbohydrates, int consumed_fat) {
+        this.summary_id = summary_id;
+        this.user_id = user_id;
+        this.date = date;
+        this.consumed_calories = consumed_calories;
+        this.consumed_protein = consumed_protein;
+        this.consumed_carbohydrates = consumed_carbohydrates;
+        this.consumed_fat = consumed_fat;
+    }
+
+    public int getSummary_id() {
+        return summary_id;
+    }
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getConsumed_calories() {
+        return consumed_calories;
+    }
+
+    public int getConsumed_protein() {
+        return consumed_protein;
+    }
+
+    public int getConsumed_carbohydrates() {
+        return consumed_carbohydrates;
+    }
+
+    public int getConsumed_fat() {
+        return consumed_fat;
+    }
+}
 
 
