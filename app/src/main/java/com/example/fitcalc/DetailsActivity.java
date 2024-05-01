@@ -1,9 +1,12 @@
 package com.example.fitcalc;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,31 +41,43 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-            TextView productName = findViewById(R.id.text_name);
-            TextView calories = findViewById(R.id.kalorie);
-            EditText weight = findViewById(R.id.weight);
-            EditText carbohydrates = findViewById(R.id.carbohydrates);
-            EditText protein = findViewById(R.id.protein);
-            EditText fat = findViewById(R.id.fat);
-            Button przelicz = findViewById(R.id.button_przelicz);
-            Button buttonDodaj = findViewById(R.id.button_dodaj);
+        SharedPreferences sharedPreferences = getSharedPreferences("FitCalcPrefs", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("userId", "DefaultUser");
+        int userId_int = Integer.parseInt(userId);
 
-            // Retrieve the product from the intent
-        userId = getIntent().getStringExtra("userId");
+        TextView productName = findViewById(R.id.text_name);
+        TextView calories = findViewById(R.id.kalorie);
+        EditText weight = findViewById(R.id.weight);
+        EditText carbohydrates = findViewById(R.id.carbohydrates);
+        EditText protein = findViewById(R.id.protein);
+        EditText fat = findViewById(R.id.fat);
+        Button przelicz = findViewById(R.id.button_przelicz);
+        Button buttonDodaj = findViewById(R.id.button_dodaj);
+        ImageView imageViewJedzenie = findViewById(R.id.imageView7);
+        ImageView imageViewStopa = findViewById(R.id.imageView6);
+        ImageView imageViewAnaliza = findViewById(R.id.imageView5);
+        ImageView imageViewLudzik = findViewById(R.id.imageView4);
+
+        // Retrieve the product from the intent
         date = getIntent().getStringExtra("date");
         mealType = getIntent().getStringExtra("mealType");
         Product product = getIntent().getParcelableExtra("productDetails");
 
-            if (product != null) {
-                productName.setText(product.getProductName());
-                calories.setText(String.valueOf(product.getCalories()) + " Kcal"); // assuming there's a getCalories method
-                weight.setText(String.valueOf(product.getWeight()) + " g");
-                carbohydrates.setText(String.valueOf(product.getCarbohydrates()) + " g");
-                protein.setText(String.valueOf(product.getProtein()) + " g");
-                fat.setText(String.valueOf(product.getFat()) + " g");
-            } else {
-                Toast.makeText(this, "No product details found.", Toast.LENGTH_LONG).show();
-            }
+        imageViewJedzenie.setOnClickListener(v -> startActivity(new Intent(DetailsActivity.this, DietActivity.class)));
+        imageViewAnaliza.setOnClickListener(v -> startActivity(new Intent(DetailsActivity.this, SummaryActivity.class)));
+        imageViewStopa.setOnClickListener(v -> startActivity(new Intent(DetailsActivity.this, TrainingActivity.class)));
+        imageViewLudzik.setOnClickListener(v -> startActivity(new Intent(DetailsActivity.this, UserActivity.class)));
+
+        if (product != null) {
+            productName.setText(product.getProductName());
+            calories.setText(String.valueOf(product.getCalories()) + " Kcal"); // assuming there's a getCalories method
+            weight.setText(String.valueOf(product.getWeight()) + " g");
+            carbohydrates.setText(String.valueOf(product.getCarbohydrates()) + " g");
+            protein.setText(String.valueOf(product.getProtein()) + " g");
+            fat.setText(String.valueOf(product.getFat()) + " g");
+        } else {
+            Toast.makeText(this, "No product details found.", Toast.LENGTH_LONG).show();
+        }
         przelicz.setOnClickListener(v -> {
             try {
                 double newWeight = Double.parseDouble(weight.getText().toString().replace(" g", ""));
@@ -82,8 +97,7 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d("DietActivity", "User ID: " + product.getProductid());
 
 
-
-
+        int finalUserId_int = userId_int;
         buttonDodaj.setOnClickListener(v -> {
             try {
                 // Parsing input values
@@ -106,6 +120,10 @@ public class DetailsActivity extends AppCompatActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(DetailsActivity.this, "Meal added successfully", Toast.LENGTH_SHORT).show();
+                            //DietActivity.fetchMealData(finalUserId_int, date);
+                            //DietActivity.fetchSummaryData(finalUserId_int, date);
+                            Log.d("DietActivity", "User ID: " + userId);
+                            startActivity(new Intent(DetailsActivity.this, DietActivity.class));
                         } else {
                             Toast.makeText(DetailsActivity.this, "Failed to add meal", Toast.LENGTH_SHORT).show();
                         }
