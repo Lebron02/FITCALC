@@ -1,6 +1,7 @@
 package com.example.fitcalc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private class LoginTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -82,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     if (jsonResponse.getBoolean("success")) {
-                        return jsonResponse.getString("userId"); // Assume the response includes the user ID
+                        return jsonResponse.getString("userId");
                     }
                 }
             } catch (IOException | JSONException e) {
@@ -105,6 +107,11 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String userId) {
             if (userId != null) {
+                SharedPreferences sharedPreferences = getSharedPreferences("FitCalcPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userId", userId);
+                editor.apply();
+
                 Intent intent = new Intent(LoginActivity.this, DietActivity.class);
                 intent.putExtra("userId", userId); // Passing user ID to the next Activity
                 startActivity(intent);
@@ -113,6 +120,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }

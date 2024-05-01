@@ -1,6 +1,7 @@
 package com.example.fitcalc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -26,7 +27,6 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
     private List<Product> productList = new ArrayList<>();
-
     private String userId;
     private String date;
     private String mealType;
@@ -36,7 +36,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        userId = getIntent().getStringExtra("userId");
         date = getIntent().getStringExtra("date");
         mealType = getIntent().getStringExtra("mealType");
 
@@ -64,25 +63,11 @@ public class SearchActivity extends AppCompatActivity {
         EditText editTextSzukaj = findViewById(R.id.text_szukaj);
         Button buttonSzukaj = findViewById(R.id.szukaj_button);
 
-        imageViewJedzenie.setOnClickListener(v -> {
-            Intent intent = new Intent(SearchActivity.this, DietActivity.class);
-            startActivity(intent);
-        });
+        imageViewJedzenie.setOnClickListener(v -> startActivity(new Intent(SearchActivity.this, DietActivity.class)));
+        imageViewAnaliza.setOnClickListener(v -> startActivity(new Intent(SearchActivity.this, SummaryActivity.class)));
+        imageViewStopa.setOnClickListener(v -> startActivity(new Intent(SearchActivity.this, TrainingActivity.class)));
+        imageViewLudzik.setOnClickListener(v -> startActivity(new Intent(SearchActivity.this, UserActivity.class)));
 
-        imageViewAnaliza.setOnClickListener(v -> {
-            Intent intent = new Intent(SearchActivity.this, SummaryActivity.class);
-            startActivity(intent);
-        });
-
-        imageViewStopa.setOnClickListener(v -> {
-            Intent intent = new Intent(SearchActivity.this, TrainingActivity.class);
-            startActivity(intent);
-        });
-
-        imageViewLudzik.setOnClickListener(v -> {
-            Intent intent = new Intent(SearchActivity.this, UserActivity.class);
-            startActivity(intent);
-        });
 
         buttonSzukaj.setOnClickListener(v -> {
             final String product = editTextSzukaj.getText().toString().trim();
@@ -163,7 +148,6 @@ public class SearchActivity extends AppCompatActivity {
     }
     private void showProductDetails(Product product) {
         Intent Intent = new Intent(SearchActivity.this, DetailsActivity.class);
-        Intent.putExtra("userId", userId);
         Intent.putExtra("date", date);
         Intent.putExtra("mealType", mealType);
         Intent.putExtra("productDetails", product);
