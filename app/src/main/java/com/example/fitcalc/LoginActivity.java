@@ -1,6 +1,7 @@
 package com.example.fitcalc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,6 +116,11 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String userId) {
             if (userId != null) {
+                SharedPreferences sharedPreferences = getSharedPreferences("FitCalcPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userId", userId);
+                editor.apply();
+
                 Intent intent = new Intent(LoginActivity.this, DietActivity.class);
                 intent.putExtra("userId", userId); // Passing user ID to the next Activity
                 intent.putExtra("username", username); // Passing username to the next Activity
