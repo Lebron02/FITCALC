@@ -20,12 +20,4 @@ public interface ProductApi {
 
     @POST("addMeal")
     Call<Void> addMeal(@Body MealData mealData);
-
-
-    @GET("meals")
-    Call<List<Meal>> getMealsByUserAndDate(@Query("user_id") int userId, @Query("meal_date") String date);
-
-    @GET("summary")
-    Call<List<Summary>> getSummaryByUserAndDate(@Query("user_id") int userId, @Query("date") String date);
-
 }
