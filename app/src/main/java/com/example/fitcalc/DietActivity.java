@@ -166,6 +166,19 @@ public class DietActivity extends AppCompatActivity {
         Button buttonAddLunch = findViewById(R.id.textview_lunch_button);
         Button buttonAddObiad = findViewById(R.id.textview_obiad_button);
         Button buttonAddKolacja = findViewById(R.id.textview_kolacja_button);
+
+        setupTextViewClickListener(R.id.textview_sniadanie, "śniadanie");
+        setupTextViewClickListener(R.id.textview_lunch, "lunch");
+        setupTextViewClickListener(R.id.textview_obiad, "obiad");
+        setupTextViewClickListener(R.id.textview_kolacja, "kolacja");
+    }
+    private void setupTextViewClickListener(int textViewId, String mealType) {
+        TextView textView = findViewById(textViewId);
+        textView.setOnClickListener(v -> {
+            Intent intent = new Intent(DietActivity.this, MealItemsActivity.class);
+            intent.putExtra("mealType", mealType);
+            startActivity(intent);
+        });
     }
 
     private void setupClickListeners() {
@@ -186,7 +199,6 @@ public class DietActivity extends AppCompatActivity {
     private void setupMealButton(int buttonId, String mealType) {
         findViewById(buttonId).setOnClickListener(v -> {
             Intent intent = new Intent(DietActivity.this, SearchActivity.class);
-            intent.putExtra("date", formattedDate);
             intent.putExtra("mealType", mealType);
             startActivity(intent);
         });

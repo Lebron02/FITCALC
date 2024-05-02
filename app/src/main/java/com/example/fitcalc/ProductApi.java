@@ -26,4 +26,11 @@ public interface ProductApi {
 
     @GET("summary")
     Call<List<Summary>> getSummaryByUserAndDate(@Query("user_id") int userId, @Query("date") String date);
+
+    @GET("inmeal")
+    Call<List<MealItem>> getMealItems(@Query("meal_id") int mealId);
+
+    @GET("mealid")
+    Call<MealId> getMealId(@Query("user_id") int userId, @Query("meal_date") String mealDate, @Query("meal_type") String mealType);
+
 }
