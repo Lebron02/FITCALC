@@ -33,4 +33,7 @@ public interface ProductApi {
     @GET("mealid")
     Call<MealId> getMealId(@Query("user_id") int userId, @Query("meal_date") String mealDate, @Query("meal_type") String mealType);
 
+    @POST("addOrUpdateExercise")
+    Call<Void> addOrUpdateExercise(@Body ExerciseData exerciseData);
+
 }

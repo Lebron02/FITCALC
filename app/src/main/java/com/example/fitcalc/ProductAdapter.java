@@ -327,6 +327,16 @@ class Summary {
         return consumed_fat;
     }
 }
+class ExerciseData {
+    private int user_id;
+    private String exercise_date;
+    private int burned_calories;
 
+    public ExerciseData(int userId, String exerciseDate, int burnedCalories) {
+        this.user_id = userId;
+        this.exercise_date = exerciseDate;
+        this.burned_calories = burnedCalories;
+    }
+}
 
 
