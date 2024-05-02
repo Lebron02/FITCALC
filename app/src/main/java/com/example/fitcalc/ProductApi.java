@@ -36,4 +36,14 @@ public interface ProductApi {
     @POST("addOrUpdateExercise")
     Call<Void> addOrUpdateExercise(@Body ExerciseData exerciseData);
 
+    @POST("addOrUpdateUserGoal")
+    Call<Void> addOrUpdateUserGoal(@Body UserGoal usergoal);
+
+    @GET("getkcalgoal")
+    Call<UserGoal> getUserGoal(@Query("user_id") int user_id);
+
+    @GET("getBurnedCalories")
+    Call<List<ExerciseData>> getBurnedCalories(@Query("user_id") int user_id, @Query("exercise_date") String exercise_date);
+
+
 }

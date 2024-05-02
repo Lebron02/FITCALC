@@ -119,11 +119,11 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("FitCalcPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("userId", userId);
+                editor.putString("username", username);
                 editor.apply();
 
+
                 Intent intent = new Intent(LoginActivity.this, DietActivity.class);
-                intent.putExtra("userId", userId); // Passing user ID to the next Activity
-                intent.putExtra("username", username); // Passing username to the next Activity
                 startActivity(intent);
             } else {
                 Toast.makeText(LoginActivity.this, "Nieprawidłowy login lub hasło.", Toast.LENGTH_SHORT).show();

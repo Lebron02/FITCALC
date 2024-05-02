@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,7 +26,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycle_view_row, parent, false);
-        return new ProductViewHolder(itemView, listener);
+        return new ProductViewHolder(itemView);
     }
 
     @Override
@@ -49,7 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         void onItemClick(Product product);
     }
 
-    private OnItemClickListener listener;
+    private static OnItemClickListener listener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
@@ -58,7 +57,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, calories, weight;
 
-        public ProductViewHolder(View view, final OnItemClickListener listener) {
+        public ProductViewHolder(View view) {
             super(view);
             productName = view.findViewById(R.id.product_name);
             calories = view.findViewById(R.id.product_kcal);
@@ -336,6 +335,45 @@ class ExerciseData {
         this.user_id = userId;
         this.exercise_date = exerciseDate;
         this.burned_calories = burnedCalories;
+    }
+
+    public int getBurned_calories() {
+        return burned_calories;
+    }
+}
+class UserGoal {
+    private int user_id;
+    private int calories;
+    private int protein;
+    private int carbohydrates;
+    private int fat;
+
+    public UserGoal(int userId, int calories, int protein, int carbohydrates, int fat) {
+        this.user_id = userId;
+        this.calories = calories;
+        this.protein = protein;
+        this.carbohydrates = carbohydrates;
+        this.fat = fat;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public int getProtein() {
+        return protein;
+    }
+
+    public int getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public int getFat() {
+        return fat;
     }
 }
 
