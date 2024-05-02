@@ -30,10 +30,17 @@ public class SummaryActivity extends AppCompatActivity {
     private TextView burnedCaloriesTextView;
     private TextView netCaloriesTextView;
 
+    private volatile boolean summaryDataFetched = false;
+    private volatile boolean burnedCaloriesFetched = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
+        caloriessum = findViewById(R.id.textView_sum_kcal_all);
+        burnedCaloriesTextView = findViewById(R.id.textView21);
+        caloriessum.setText("0");
+        burnedCaloriesTextView.setText("0");
 
         // Inicjalizacja widoków
         ImageView imageViewJedzenie = findViewById(R.id.imageView7);
@@ -44,11 +51,10 @@ public class SummaryActivity extends AppCompatActivity {
         carbohydratesEditText = findViewById(R.id.textView18);
         fatEditText = findViewById(R.id.textView16);
         proteinsum = findViewById(R.id.textView_sum_b);
-        caloriessum = findViewById(R.id.textView_sum_kcal_all);
         carbohydratessum = findViewById(R.id.textView_sum_w);
         fatsum = findViewById(R.id.textView_sum_t);
-        burnedCaloriesTextView = findViewById(R.id.textView21);
         netCaloriesTextView = findViewById(R.id.textView_sum_kcal);
+
 
         TextView datetext = findViewById(R.id.training_text);
         SharedPreferences sharedPreferences = getSharedPreferences("FitCalcPrefs", MODE_PRIVATE);
@@ -122,6 +128,8 @@ public class SummaryActivity extends AppCompatActivity {
                     proteinsum.setText(String.valueOf(summary.getConsumed_protein()));
                     carbohydratessum.setText(String.valueOf(summary.getConsumed_carbohydrates()));
                     fatsum.setText(String.valueOf(summary.getConsumed_fat()));
+                    summaryDataFetched = true;
+                    updateNetCaloriesIfNeeded();
                 } else {
                     // Set all TextViews to "0" if no data was returned
                     caloriessum.setText("0");
@@ -155,10 +163,12 @@ public class SummaryActivity extends AppCompatActivity {
                     // Assuming there is only one entry or we only care about the first one
                     ExerciseData data = response.body().get(0);
                     burnedCaloriesTextView.setText(String.valueOf(data.getBurned_calories()));
-                    updateNetCalories();
+                    burnedCaloriesFetched = true;
+                    updateNetCaloriesIfNeeded();
                 } else {
                     burnedCaloriesTextView.setText("0");
-                    updateNetCalories();
+                    burnedCaloriesFetched = true;
+                    updateNetCaloriesIfNeeded();
                     Toast.makeText(SummaryActivity.this, "No burned calories data found for this date.", Toast.LENGTH_LONG).show();
                 }
             }
@@ -167,19 +177,22 @@ public class SummaryActivity extends AppCompatActivity {
             public void onFailure(Call<List<ExerciseData>> call, Throwable t) {
                 Toast.makeText(SummaryActivity.this, "Network failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 burnedCaloriesTextView.setText("0");
-                updateNetCalories();
+                burnedCaloriesFetched = true;
+                updateNetCaloriesIfNeeded();
             }
         });
     }
 
-    private void updateNetCalories() {
-        try {
-            int totalCalories = Integer.parseInt(caloriessum.getText().toString());
-            int burnedCalories = Integer.parseInt(burnedCaloriesTextView.getText().toString());
-            int netCalories = totalCalories - burnedCalories;
-            netCaloriesTextView.setText(String.valueOf(netCalories));
-        } catch (NumberFormatException e) {
-            Toast.makeText(SummaryActivity.this, "Error calculating net calories", Toast.LENGTH_SHORT).show();
+    private void updateNetCaloriesIfNeeded() {
+        if (summaryDataFetched && burnedCaloriesFetched) {
+            try {
+                int totalCalories = Integer.parseInt(caloriessum.getText().toString());
+                int burnedCalories = Integer.parseInt(burnedCaloriesTextView.getText().toString());
+                int netCalories = totalCalories - burnedCalories;
+                netCaloriesTextView.setText(String.valueOf(netCalories));
+            } catch (NumberFormatException e) {
+                Toast.makeText(SummaryActivity.this, "Error calculating net calories", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +39,8 @@ public class TrainingActivity extends AppCompatActivity {
         int userId_int = Integer.parseInt(userId);
 
         TextViewDate.setText(meal_date);
+
+        fetchBurnedCalories(userId_int,meal_date);
 
         // Ustawienie OnClickListener dla obrazka Jedzenie
         imageViewJedzenie.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +106,32 @@ public class TrainingActivity extends AppCompatActivity {
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("TrainingActivity", "Error adding or updating exercise: " + t.getMessage());
                 Toast.makeText(TrainingActivity.this, "Błąd: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void fetchBurnedCalories(int userId, String date) {
+        ProductApi apiService = RetrofitClient.getClient("http://10.0.2.2:3000/").create(ProductApi.class);
+        Call<List<ExerciseData>> call = apiService.getBurnedCalories(userId, date);
+
+        call.enqueue(new Callback<List<ExerciseData>>() {
+            @Override
+            public void onResponse(Call<List<ExerciseData>> call, Response<List<ExerciseData>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    // Assuming there is only one entry or we only care about the first one
+                    ExerciseData data = response.body().get(0);
+                    burnedCaloriesEditText.setText(String.valueOf(data.getBurned_calories()));
+
+
+                } else {
+                    burnedCaloriesEditText.setText("0");
+                    Toast.makeText(TrainingActivity.this, "No burned calories data found for this date.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ExerciseData>> call, Throwable t) {
+                Toast.makeText(TrainingActivity.this, "Network failure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                burnedCaloriesEditText.setText("0");
             }
         });
     }
