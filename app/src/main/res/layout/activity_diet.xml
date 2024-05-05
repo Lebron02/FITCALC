@@ -106,7 +106,8 @@
 
             <TextView
                 android:id="@+id/textview_sniadanie_kcal"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -117,7 +118,8 @@
 
             <TextView
                 android:id="@+id/textview_sniadanie_b"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -128,7 +130,8 @@
 
             <TextView
                 android:id="@+id/textview_sniadanie_t"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -139,7 +142,8 @@
 
             <TextView
                 android:id="@+id/textview_sniadanie_w"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -153,15 +157,16 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="-4dp"
-                android:layout_marginLeft="15dp"
+
+                android:layout_marginRight="15dp"
                 android:background="@drawable/add" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout_L"
-        android:layout_width="417dp"
-        android:layout_height="98dp"
+        android:layout_width="413dp"
+        android:layout_height="99dp"
         android:background="@color/background"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_O"
@@ -189,10 +194,11 @@
 
             <TextView
                 android:id="@+id/textview_lunch_kcal"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -200,10 +206,11 @@
 
             <TextView
                 android:id="@+id/textview_lunch_b"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -211,10 +218,11 @@
 
             <TextView
                 android:id="@+id/textview_lunch_t"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -222,10 +230,11 @@
 
             <TextView
                 android:id="@+id/textview_lunch_w"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -235,7 +244,8 @@
                 android:id="@+id/textview_lunch_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="15dp"
+
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="-4dp"
                 android:background="@drawable/add" />
         </LinearLayout>
@@ -243,8 +253,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout_O"
-        android:layout_width="416dp"
-        android:layout_height="98dp"
+        android:layout_width="413dp"
+        android:layout_height="99dp"
         android:background="@color/lightbackground"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_K"
@@ -271,7 +281,8 @@
 
             <TextView
                 android:id="@+id/textview_obiad_kcal"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -282,7 +293,8 @@
 
             <TextView
                 android:id="@+id/textview_obiad_b"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -293,7 +305,8 @@
 
             <TextView
                 android:id="@+id/textview_obiad_t"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -304,7 +317,8 @@
 
             <TextView
                 android:id="@+id/textview_obiad_w"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -318,7 +332,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="-4dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:background="@drawable/add" />
         </LinearLayout>
     </LinearLayout>
@@ -354,7 +368,8 @@
 
             <TextView
                 android:id="@+id/textview_kolacja_kcal"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -365,7 +380,8 @@
 
             <TextView
                 android:id="@+id/textview_kolacja_b"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -376,7 +392,8 @@
 
             <TextView
                 android:id="@+id/textview_kolacja_t"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -387,7 +404,8 @@
 
             <TextView
                 android:id="@+id/textview_kolacja_w"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -398,10 +416,11 @@
 
             <Button
                 android:id="@+id/textview_kolacja_button"
-                android:layout_height="40dp"
                 android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="-4dp"
-                android:layout_marginLeft="15dp"
+
+                android:layout_marginRight="15dp"
                 android:background="@drawable/add" />
         </LinearLayout>
     </LinearLayout>
@@ -436,7 +455,8 @@
 
             <TextView
                 android:id="@+id/textview_podsumowanie_kcal"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="15dp"
@@ -448,7 +468,8 @@
 
             <TextView
                 android:id="@+id/textview_podsumowanie_b"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -460,7 +481,8 @@
 
             <TextView
                 android:id="@+id/textview_podsumowanie_t"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
@@ -472,7 +494,8 @@
 
             <TextView
                 android:id="@+id/textview_podsumowanie_w"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
